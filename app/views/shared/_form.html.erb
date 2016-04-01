@@ -1,7 +1,6 @@
-<h1>Create User</h1>
-<p>Find me in app/views/users/new.html.erb</p>
-<%= render partial: "shared/errors" %>
-<form action=" <%= users_url %>", method="post">
+
+<h1> Log In </h1>
+<form action=" <%= session_url %>", method="post">
   <input
     type="hidden"
     name="authenticity_token"
@@ -16,8 +15,5 @@
     <br>
 
   <input type="submit">
+
 </form>
-
-
-
-<!-- user/password input section -->

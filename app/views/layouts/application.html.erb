@@ -8,6 +8,11 @@
 </head>
 <body>
 
+<% if logged_in? %>
+  <%= button_to "Logout", session_url, method: :delete %>
+<% else %>
+  <%= render partial: "shared/form" %>
+<% end %>
 <%= yield %>
 
 </body>

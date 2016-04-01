@@ -1,7 +1,6 @@
 class SessionsController < ApplicationController
-  def new
-    @user = current_user #possible error here
-    render :new
+  def new #possible error here
+    redirect_to user_url(current_user)
   end
 
   def show
@@ -15,13 +14,15 @@ class SessionsController < ApplicationController
     )
 
     if user.nil?
-      render :new
+      flash.now[:errors] = ["Incorrect username and/or password"]
     else
-      login_user!(@user)
-      redirect_to root_url
+      login_user!(user)
+      redirect_to user_url(user)
     end
   end
 
   def destroy
+    logout_user!
+
   end
 end

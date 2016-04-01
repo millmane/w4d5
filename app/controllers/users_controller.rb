@@ -5,14 +5,15 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find_by(params[:id])
+    @user = User.find_by_id(params[:id])
     render :show
   end
 
   def create
-    @user = User.create(user_params)
+    @user = User.new(user_params)
+
     if @user.save
-      redirect_to :show
+      redirect_to user_url(@user)
     else
       flash[:errors] = @user.errors.full_messages
       render :new
@@ -20,7 +21,8 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    User.find_by(params[:id]).delete
+    User.find_by_id(params[:id]).delete
+    render :new
   end
 
   def edit
@@ -29,6 +31,6 @@ class UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:users).permit(:session_token, :password, :username)
+    params.require(:user).permit(:password, :username)
   end
 end
